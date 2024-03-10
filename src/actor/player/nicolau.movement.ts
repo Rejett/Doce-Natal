@@ -1,12 +1,8 @@
-// Functions to allow moviments;
-
 import Game from "../../game";
 import { KeyboardListener } from "../../io/keyboard.events";
 import { Nicolau } from "./nicolau";
 
 export class NicolauMovement {
-  public readonly ORIGINAL_HEIGHT = 40;
-  public readonly ORIGINAL_WIDTH = 40;
 
   private VELOCITY_Y = 0;
   private GRAVITY = 1;
@@ -73,10 +69,10 @@ export class NicolauMovement {
   };
 
   stoop = () => {
-    if (this.IS_STOOP && this.nicolau.height > this.ORIGINAL_HEIGHT / 2) {
+    if (this.IS_STOOP && this.nicolau.height > Nicolau.ORIGINAL_HEIGHT / 4) {
       this.nicolau.y += 1;
       this.nicolau.height -= 1;
-    } else if (!this.IS_STOOP && this.nicolau.height < this.ORIGINAL_HEIGHT) {
+    } else if (!this.IS_STOOP && this.nicolau.height < Nicolau.ORIGINAL_HEIGHT / 4) {
       this.nicolau.height += 1;
     }
   };

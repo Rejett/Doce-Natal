@@ -1,39 +1,39 @@
 import { Nicolau } from "./nicolau";
 
 export class NicolauAnimation {
-  image: any;
   nicolau: Nicolau;
-  currentFrame: number;
 
+  walkImage: any;
+  currentFrame: number;
+  
   gameFrame = 0;
   staggerFrame = 10;
 
-  SPRITE_WIDTH = 200;
-  SPRITE_HEIGHT = 300;
+  SPRITE_WIDTH = 400;
+  SPRITE_HEIGHT = 600;
 
   constructor(nicolau: Nicolau) {
-    this.image = new Image();
-    this.image.src = "nicolau.jpeg";
+    this.walkImage = new Image();
+    this.walkImage.src = "assets/nicolau-walk.png";
+
     this.nicolau = nicolau;
     this.currentFrame = 0;
   }
 
-  draw = (context: CanvasRenderingContext2D) => {
-    context.fillStyle = "blue";
-
+  walk = (context: CanvasRenderingContext2D) => {
     if (this.gameFrame % this.staggerFrame === 0) {
       if (this.currentFrame < 5) {
         this.currentFrame++;
-      } else {
-        this.currentFrame = 0;
+      } else if (this.currentFrame > 0) {
+        this.currentFrame--;
       }
     }
 
-    const position = Math.floor(this.gameFrame/this.staggerFrame) % 6
+    const position = Math.floor(this.gameFrame / this.staggerFrame) % 6;
 
     context.drawImage(
       // image
-      this.image,
+      this.walkImage,
       // source image x
       this.SPRITE_WIDTH * position,
       // source image y
@@ -53,5 +53,9 @@ export class NicolauAnimation {
     );
 
     this.gameFrame++;
+  };
+
+  draw = (context: CanvasRenderingContext2D) => {
+    this.walk(context);
   };
 }

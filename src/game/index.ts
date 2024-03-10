@@ -18,12 +18,6 @@ export default class Game {
 
     public static gravity = 0.4;
 
-    public static initialize = () => {
-      Game.canvasContext = new CanvasContext();
-      Game.render = new RenderLoop();
-      Game.scenes = scenes;
-    }
-
     static start() {
       Game.canvasContext = new CanvasContext();
       Game.render = new RenderLoop();

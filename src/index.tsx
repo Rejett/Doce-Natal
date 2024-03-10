@@ -9,7 +9,6 @@ window.addEventListener('load', () => {
   const santa = new Nicolau(20, window.innerHeight - 60);
 
   Game.addActors(santa);
-  Game.initialize();
   Game.start();
   
   KeyboardListener.addKeyBoardlisteners();
