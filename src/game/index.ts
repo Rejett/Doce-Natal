@@ -1,61 +1,61 @@
-import Actor from "../actor/Actor";
+import Actor from "../actor/actor";
+import { Background } from "../background/background";
 import CanvasContext from "../render/canvas.context";
 import { RenderLoop } from "../render/render.loop";
-import { scenes } from "../scene";
-import { Scene } from "../scene/scene";
 
 export default class Game {
 
+    public static readonly TOP_BOUNDARY = 0;
+    public static readonly RIGHT_BOUNDARY = 720;
+    public static readonly BOTTOM_BOUNDARY = 480;
     public static readonly LEFT_BOUNDARY = 0;
-    public static readonly RIGHT_BOUNDARY = window.innerWidth - 20;
-    public static readonly BOTTOM_BOUNDARY = window.innerHeight - 20;
     
-    private static canvasContext: CanvasContext;
-    private static events: any;
-    private static actors: Actor[] = [];
-    private static render: RenderLoop;
-    private static scenes: Scene[];
-
+    private static CANVAS_CONTEXT: CanvasContext;
+    private static EVENTS: any;
+    private static ACTORS: Actor[] = [];
+    private static RENDER_LOOP: RenderLoop;
+    private static BACKGROUND: Background;
+    
     public static gravity = 0.4;
-
+    
     static start() {
-      Game.canvasContext = new CanvasContext();
-      Game.render = new RenderLoop();
-      Game.scenes = scenes;
+      Game.CANVAS_CONTEXT = new CanvasContext();
+      Game.RENDER_LOOP = new RenderLoop();
+      Game.BACKGROUND = new Background(Game.BOTTOM_BOUNDARY - 500);
       
-      const { canvas, context } = Game.canvasContext;
+      const { canvas, context } = Game.CANVAS_CONTEXT;
       
       canvas.width = this.RIGHT_BOUNDARY;
       canvas.height = this.BOTTOM_BOUNDARY;
 
-      Game.render.start(context);
+      Game.RENDER_LOOP.start(context);
     }
 
     static addEvent = (event: any) => {
-      this.events = [this.events, event];
+      this.EVENTS = [this.EVENTS, event];
     }
 
     static removeEvent = (event: any) => {
-      this.events = this.events.filter((e: any) => {
+      this.EVENTS = this.EVENTS.filter((e: any) => {
         return e.id !== event.id
       });
     }
 
     static getActors = (): Actor[] => {
-      return [...this.actors];
+      return [...this.ACTORS];
     }
 
     static addActors = (actors: any) => {
-      this.actors = [...this.actors, actors];
+      this.ACTORS = [...this.ACTORS, actors];
     }
 
     static removeActor = (actor: any) => {
-      this.actors = this.actors.filter((a: any) => {
+      this.ACTORS = this.ACTORS.filter((a: any) => {
         return a.id !== actor.id
       });
     }
 
-    static currentScene = (): Scene => {
-      return Game.scenes[0];
+    static getBackground = () => {
+      return this.BACKGROUND;
     }
 }

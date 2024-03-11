@@ -1,11 +1,10 @@
-import { Nicolau } from "./nicolau";
+import { Nicolau } from "../nicolau";
 
-export class NicolauAnimation {
-  nicolau: Nicolau;
-
+export class NicolauAnimationWalk {
   walkImage: any;
+  nicolau: Nicolau;
   currentFrame: number;
-  
+
   gameFrame = 0;
   staggerFrame = 10;
 
@@ -14,17 +13,17 @@ export class NicolauAnimation {
 
   constructor(nicolau: Nicolau) {
     this.walkImage = new Image();
-    this.walkImage.src = "assets/nicolau-walk.png";
+    this.walkImage.src = "assets/nicolau/nicolau-walk.png";
 
     this.nicolau = nicolau;
     this.currentFrame = 0;
   }
 
-  walk = (context: CanvasRenderingContext2D) => {
+  draw = (context: CanvasRenderingContext2D) => {
     if (this.gameFrame % this.staggerFrame === 0) {
       if (this.currentFrame < 5) {
         this.currentFrame++;
-      } else if (this.currentFrame > 0) {
+      } else if (this.currentFrame > -1) {
         this.currentFrame--;
       }
     }
@@ -43,19 +42,15 @@ export class NicolauAnimation {
       // source image height
       this.SPRITE_HEIGHT,
       // crop image on player left 0
-      this.nicolau.x,
+      this.nicolau.x + 10,
       // crop image on player top 0
       this.nicolau.y,
       // crop image right in bound
-      200,
+      100,
       // crop image bottom in bound
-      300
+      200
     );
 
     this.gameFrame++;
-  };
-
-  draw = (context: CanvasRenderingContext2D) => {
-    this.walk(context);
   };
 }

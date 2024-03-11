@@ -8,7 +8,7 @@ export class RenderLoop {
       id = requestAnimationFrame(() => this.start(context));
 
       clearDraw(context);
-      drawScene(context!);
+      drawBackground(context!);
       updateActors();
       drawActors(context!);
     } catch (e) {
@@ -21,15 +21,13 @@ export class RenderLoop {
   }
 }
 
+
 const clearDraw = (context: CanvasRenderingContext2D): void => {
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 };
 
-const drawScene = (context: CanvasRenderingContext2D): void => {
-  const scene = Game.currentScene();
-  if (scene) {
-    scene.draw(context);
-  }
+const drawBackground = (context: CanvasRenderingContext2D): void => {
+  Game.getBackground().draw(context);
 };
 
 const updateActors = (): void => {

@@ -12,7 +12,7 @@ export class KeyboardListener {
     document.addEventListener("keyup", ({ key }: KeyboardEvent) => {
       if (!KeyboardListener.REALEASED_KEYS.includes(key)) {
         KeyboardListener.REALEASED_KEYS = [
-          ...KeyboardListener.PRESSED_KEYS,
+          ...KeyboardListener.REALEASED_KEYS,
           key,
         ];
       }

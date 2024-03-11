@@ -1,16 +1,23 @@
-import { NicolauAnimation } from "./nicolau.animation";
-import { NicolauMovement } from "./nicolau.movement";
+import { NicolauAnimation } from "./animation/nicolau.animation";
+import { NicolauMovement } from "./moviment/nicolau.movement";
 import { Updatable } from "./updatable";
 
 export class Nicolau extends Updatable {
-  public static readonly ORIGINAL_WIDTH: number = 200;
-  public static readonly ORIGINAL_HEIGHT: number = 300;
+  public static readonly ORIGINAL_X = 20;
+  public static readonly ORIGINAL_Y = window.innerHeight - 620;
+  public static readonly ORIGINAL_WIDTH: number = 100;
+  public static readonly ORIGINAL_HEIGHT: number = 200;
 
   private animation: NicolauAnimation;
   private moviment: NicolauMovement;
 
-  constructor(x: number, y: number) {
-    super(x, y, Nicolau.ORIGINAL_WIDTH, Nicolau.ORIGINAL_HEIGHT);
+  constructor() {
+    super(
+      Nicolau.ORIGINAL_X,
+      Nicolau.ORIGINAL_Y,
+      Nicolau.ORIGINAL_WIDTH,
+      Nicolau.ORIGINAL_HEIGHT
+    );
 
     this.animation = new NicolauAnimation(this);
     this.moviment = new NicolauMovement(this);

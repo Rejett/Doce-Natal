@@ -6,9 +6,9 @@ import { KeyboardListener } from "./io/keyboard.events";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 window.addEventListener('load', () => {
-  const santa = new Nicolau(20, window.innerHeight - 60);
-
-  Game.addActors(santa);
+  
+  const nicolau = new Nicolau();
+  Game.addActors(nicolau);
   Game.start();
   
   KeyboardListener.addKeyBoardlisteners();

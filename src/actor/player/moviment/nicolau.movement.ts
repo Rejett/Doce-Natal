@@ -1,6 +1,7 @@
-import Game from "../../game";
-import { KeyboardListener } from "../../io/keyboard.events";
-import { Nicolau } from "./nicolau";
+
+import Game from "../../../game";
+import { KeyboardListener } from "../../../io/keyboard.events";
+import { Nicolau } from "../nicolau";
 
 export class NicolauMovement {
 
@@ -25,7 +26,7 @@ export class NicolauMovement {
 
   onUpPress = () => {
     if (!this.IS_JUMPING && this.isOnTheFloor()) {
-      this.VELOCITY_Y -= 30;
+      this.VELOCITY_Y -= 15;
     }
     this.IS_JUMPING = true;
   };
@@ -47,11 +48,18 @@ export class NicolauMovement {
     }
   };
 
+  onAttack = () => {
+    if (!this.IS_STOOP) {
+      this.SPEED = 5;
+    }
+  }
+
   private MOVIMENTS: { [key: string]: () => void } = {
     ArrowUp: this.onUpPress,
     ArrowRight: this.onRightPress,
     ArrowDown: this.onDownPress,
     ArrowLeft: this.onLeftPress,
+    ' ': this.onAttack,
   };
 
   jump = () => {
@@ -69,10 +77,10 @@ export class NicolauMovement {
   };
 
   stoop = () => {
-    if (this.IS_STOOP && this.nicolau.height > Nicolau.ORIGINAL_HEIGHT / 4) {
+    if (this.IS_STOOP && this.nicolau.height > Nicolau.ORIGINAL_HEIGHT / 2) {
       this.nicolau.y += 1;
       this.nicolau.height -= 1;
-    } else if (!this.IS_STOOP && this.nicolau.height < Nicolau.ORIGINAL_HEIGHT / 4) {
+    } else if (!this.IS_STOOP && this.nicolau.height < Nicolau.ORIGINAL_HEIGHT) {
       this.nicolau.height += 1;
     }
   };
@@ -80,15 +88,23 @@ export class NicolauMovement {
   walk = () => {
     this.nicolau.x += this.SPEED;
 
+    console.log('nicolau.x', this.nicolau.x);
+    console.log('LEFT_BOUNDARY', Game.LEFT_BOUNDARY);
+    console.log('LEFT_BOUNDARY', Game.RIGHT_BOUNDARY);
+
     // when santa's is on then extreme left side, do player returns in the other side;
-    if (this.nicolau.x === Game.LEFT_BOUNDARY) {
-      this.nicolau.x = Game.RIGHT_BOUNDARY;
+    if (this.nicolau.x <= Game.LEFT_BOUNDARY) {
+      this.nicolau.x = Game.RIGHT_BOUNDARY - this.nicolau.widht - 5;
 
       // when santa's front is on the extreme right side, do player returns in the other side.
-    } else if (this.nicolau.x > Game.RIGHT_BOUNDARY - this.nicolau.widht) {
+    } else if (this.nicolau.x >= Game.RIGHT_BOUNDARY - this.nicolau.widht) {
       this.nicolau.x = Game.LEFT_BOUNDARY;
     }
   };
+
+  attack = () => {
+    this.nicolau.x += this.SPEED;
+  }
 
   executemoviment = (key: string): void => {
     const moviment = this.MOVIMENTS[key];

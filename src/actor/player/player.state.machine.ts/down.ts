@@ -1,4 +1,4 @@
-import State from "../../stateMachine/state";
+import State from "../../../stateMachine/state";
 
 export class DownState extends State {
   constructor() {
