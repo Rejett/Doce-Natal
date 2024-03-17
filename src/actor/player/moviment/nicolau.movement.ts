@@ -82,6 +82,7 @@ export class NicolauMovement {
       this.nicolau.height -= 1;
     } else if (!this.IS_STOOP && this.nicolau.height < Nicolau.ORIGINAL_HEIGHT) {
       this.nicolau.height += 1;
+      this.nicolau.y -= 1;
     }
   };
 
@@ -94,10 +95,10 @@ export class NicolauMovement {
 
     // when santa's is on then extreme left side, do player returns in the other side;
     if (this.nicolau.x <= Game.LEFT_BOUNDARY) {
-      this.nicolau.x = Game.RIGHT_BOUNDARY - this.nicolau.widht - 5;
+      this.nicolau.x = Game.RIGHT_BOUNDARY - this.nicolau.width - 5;
 
       // when santa's front is on the extreme right side, do player returns in the other side.
-    } else if (this.nicolau.x >= Game.RIGHT_BOUNDARY - this.nicolau.widht) {
+    } else if (this.nicolau.x >= Game.RIGHT_BOUNDARY - this.nicolau.width) {
       this.nicolau.x = Game.LEFT_BOUNDARY;
     }
   };
