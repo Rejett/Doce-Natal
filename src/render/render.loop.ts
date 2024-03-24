@@ -1,4 +1,4 @@
-import { Nicolau } from "../actor/player/nicolau";
+import { Updatable } from "../actor/updatable";
 import Game from "../game";
 
 export class RenderLoop {
@@ -32,10 +32,11 @@ const drawBackground = (context: CanvasRenderingContext2D): void => {
 
 const updateActors = (): void => {
   const actors = Game.getActors();
+
   if (actors) {
     Game.getActors()
       .forEach((actor) => {
-        if (actor instanceof Nicolau) {
+        if (actor instanceof Updatable) {
           actor.update();
         }
       });

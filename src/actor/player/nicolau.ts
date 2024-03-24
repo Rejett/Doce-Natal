@@ -1,6 +1,6 @@
 import { NicolauAnimation } from "./animation/nicolau.animation";
 import { NicolauMovement } from "./moviment/nicolau.movement";
-import { Updatable } from "./updatable";
+import { Updatable } from "../updatable";
 
 export class Nicolau extends Updatable {
   public static readonly ORIGINAL_X = 20;

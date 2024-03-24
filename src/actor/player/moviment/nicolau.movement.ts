@@ -88,11 +88,7 @@ export class NicolauMovement {
 
   walk = () => {
     this.nicolau.x += this.SPEED;
-
-    console.log('nicolau.x', this.nicolau.x);
-    console.log('LEFT_BOUNDARY', Game.LEFT_BOUNDARY);
-    console.log('LEFT_BOUNDARY', Game.RIGHT_BOUNDARY);
-
+    
     // when santa's is on then extreme left side, do player returns in the other side;
     if (this.nicolau.x <= Game.LEFT_BOUNDARY) {
       this.nicolau.x = Game.RIGHT_BOUNDARY - this.nicolau.width - 5;

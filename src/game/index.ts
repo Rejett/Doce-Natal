@@ -9,6 +9,7 @@ export default class Game {
     public static readonly RIGHT_BOUNDARY = 720;
     public static readonly BOTTOM_BOUNDARY = 480;
     public static readonly LEFT_BOUNDARY = 0;
+    public static FRAME = 0;
     
     private static CANVAS_CONTEXT: CanvasContext;
     private static EVENTS: any;
